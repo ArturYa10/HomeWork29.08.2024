@@ -1,27 +1,32 @@
+import java.util.Random;
+
 public class SalaryCalculator {
     public static void main(String[] args) {
-        double hourlyRate = 10.0;
-        int hoursWorked = 45;
-        double weeklySalary = calculateWeeklySalary(hourlyRate, hoursWorked);
-        if (weeklySalary != -1.0) {
-            System.out.println("Недельная зарплата: $" + weeklySalary);
-        }
+        // Создаем объект Random для генерации случайных чисел
+        Random random = new Random();
 
+        // Генерируем случайное количество секунд от 0 до 28800
+        int n = random.nextInt(28801); // Верхняя граница exclusive, поэтому +1
+
+        // Выводим количество секунд на табло
+        System.out.println("На табло: " + n + " секунд");
+
+        // Вызываем метод для вывода сообщения о количестве оставшихся часов
+        printHoursLeft(n);
     }
 
-    public static double calculateWeeklySalary(double hourlyRate, int hoursWorked) {
-        if (hourlyRate < 8.0) {
-            System.out.println("Ошибка: зарплата не может быть меньше 8 долларов в час.");
-            return -1.0;
-        } else if (hoursWorked > 60) {
-            System.out.println("Ошибка: работник не может работать больше 60 часов в неделю.");
-            return -1.0;
+    // Метод для вывода информации о количестве полных часов
+    public static void printHoursLeft(int seconds) {
+        // Вычисляем количество полных часов
+        int hours = seconds / 3600;
+
+        // В зависимости от количества часов выводим соответствующее сообщение
+        if (hours > 1) {
+            System.out.println("Осталось " + hours + " часов");
+        } else if (hours == 1) {
+            System.out.println("Остался 1 час");
         } else {
-            double regularHours = (double)Math.min(hoursWorked, 40);
-            double overtimeHours = (double)Math.max(0, hoursWorked - 40);
-            double regularPay = regularHours * hourlyRate;
-            double overtimePay = overtimeHours * hourlyRate * 1.5;
-            return regularPay + overtimePay;
+            System.out.println("Осталось менее часа");
         }
     }
 }

@@ -1,20 +1,39 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        double m = 10.5;
-        double n = 10.45;
-        printClosestToTen(m, n);
+        Scanner scanner = new Scanner(System.in);
+
+        // Запрашиваем у пользователя два числа
+        System.out.print("Введите число m: ");
+        double m = scanner.nextDouble();
+
+        System.out.print("Введите число n: ");
+        double n = scanner.nextDouble();
+
+        // Вызываем метод для определения ближайшего числа к 10
+        double closest = findClosestToTen(m, n);
+
+        // Выводим результат
+        System.out.println("Ближайшее к 10: " + closest);
+
+        scanner.close();
     }
 
-    public static void printClosestToTen(double m, double n) {
-        double distanceM = Math.abs(10.0 - m);
-        double distanceN = Math.abs(10.0 - n);
-        if (distanceM < distanceN) {
-            System.out.println("Число " + m + " ближе к 10.");
-        } else if (distanceN < distanceM) {
-            System.out.println("Число " + n + " ближе к 10.");
-        } else {
-            System.out.println("Оба числа " + m + " и " + n + " равноудалены от 10.");
-        }
+    // Метод для нахождения числа, ближайшего к 10
+    public static double findClosestToTen(double m, double n) {
+        // Вычисляем абсолютные разности между числами и 10
+        double distanceM = Math.abs(10 - m);
+        double distanceN = Math.abs(10 - n);
 
+        // Сравниваем разности и возвращаем ближайшее значение
+        if (distanceM < distanceN) {
+            return m;
+        } else if (distanceN < distanceM) {
+            return n;
+        } else {
+            // Если оба числа равноудалены от 10, можно вернуть любое (например, m)
+            return m; // или return n;
+        }
     }
 }
